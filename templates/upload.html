@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>上传图片识别</title>
+    <style>
+        input[type="text"] {
+            height: 50px;
+            font-size: 30px;
+        }
+    </style>
+    <script src="../static/js/jquery.min.js"></script>
+</head>
+<body style="background-color:#f0ffff">
+<div id="main" style="margin-left: 100px;margin-top:100px;">
+    <h3>请选择您要识别的图片：</h3>
+    <input type="file" id="file_select" size="30">
+    <div id="show_img" style="width:500px;height:300px;margin-top: 10px;">
+
+    </div>
+    <button id="submit" style="font-size: 20px">Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;
+    <button id="clear" style="font-size: 20px">Clear</button>
+    <h2>算式识别：</h2>
+    <input type="text" id="res1" value="算式"><br>
+    <h2>计算结果：</h2>
+    <input type="text" id="res2" value="结果"><br>
+    <script>
+        let fp = document.getElementById('file_select');
+
+        $("#submit").click(function () {
+            alert(1);
+            alert(fp.value);
+        });
+    </script>
+</div>
+</body>
+</html>
