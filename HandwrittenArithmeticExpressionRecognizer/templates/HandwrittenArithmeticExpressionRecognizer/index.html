@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>手写算式识别与计算</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'HandwrittenArithmeticExpressionRecognizer/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'HandwrittenArithmeticExpressionRecognizer/css/main.css' %}">
+    <script src="{% static 'HandwrittenArithmeticExpressionRecognizer/js/jquery.min.js' %}"></script>
+    <script src="{% static 'HandwrittenArithmeticExpressionRecognizer/js/index.js' %}"></script>
+</head>
+<body class="body_main">
+<div id="head" style="text-align: center">
+    <h1>手写算式识别与计算</h1>
+</div>
+<div id="main">
+    <div id="navigator">
+        <h4 id="h4">功能项：&nbsp;&nbsp;&nbsp;</h4>
+        <button id="upload" class="btn_1">上传图片识别</button>&nbsp;&nbsp;&nbsp;&nbsp;
+        <button id="hand_write" class="btn_1">页面绘制识别</button>
+    </div>
+    <iframe id="show_page">
+        您的浏览器不支持 iframe 标签。
+    </iframe>
+</div>
+</body>
+</html>

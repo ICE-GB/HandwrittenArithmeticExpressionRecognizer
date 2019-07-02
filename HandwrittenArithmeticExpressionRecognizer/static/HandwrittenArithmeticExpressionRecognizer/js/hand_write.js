@@ -1,14 +1,10 @@
-let s = document.getElementById("show");
+window.onload = function () {
     // 获取主画布
     let my_canvas = document.getElementById("my_canvas");
     // 获取识别结果框
     let res1 = document.getElementById("res1");
     // 获取计算结果框
     let res2 = document.getElementById("res2");
-    // 获取提交按钮
-    let btn1 = document.getElementById("submit");
-    // 获取清除按钮
-    let btn2 = document.getElementById("clear");
     // 获取主画布2d接口的画笔
     let ctx1 = my_canvas.getContext("2d");
 
@@ -77,11 +73,15 @@ let s = document.getElementById("show");
         };
     };
 
-
-    btn1.onclick = function () {
+    // 提交按钮绑定事件
+    $("#submit").click(function () {
+        // 调用后端识别函数
         res1.value = "(4 + 6) * 3";
         res2.value = "30";
-    };
-    btn2.onclick = function () {
+    });
+    // 清除按钮绑定事件
+    $("#clear").click(function () {
         init_canvas();
-    };
+    });
+
+};
