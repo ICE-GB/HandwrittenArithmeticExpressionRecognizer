@@ -9,25 +9,22 @@
     <script src="{% static 'HandwrittenArithmeticExpressionRecognizer/js/jquery.min.js' %}"></script>
     <script src="{% static 'HandwrittenArithmeticExpressionRecognizer/js/hand_write.js' %}"></script>
 </head>
-<style>
-    body {
-        margin: 0;
-        padding: 0;
-    }
-</style>
 <body id="body_branch">
 <div id="div_main">
-    <h4>请绘制数学算式</h4>
-    <canvas id="my_canvas" style="width: 777px;height: 300px;border: 1px solid;">
-    </canvas>
-    <br>
-    <button id="submit" class="btn_2">Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;
-    <button id="clear" class="btn_2">Clear</button>
+    <div id="show_left">
+        <h4>请绘制您要识别的算式</h4>
+        <div id="show_img">
+            <canvas id="my_canvas">
+            </canvas>
+        </div>
+        <button id="submit" class="btn_2">Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;
+        <button id="clear" class="btn_2">Clear</button>
+    </div>
     <div id="show_res">
         <h2>算式识别：</h2>
-        <input type="text" id="res1" value="算式" style="height: 50px;font-size: 30px"><br>
+        <input type="text" id="res1" value="算式" readonly><br>
         <h2>计算结果：</h2>
-        <input type="text" id="res2" value="结果" style="height: 50px;font-size: 30px"><br>
+        <input type="text" id="res2" value="结果" readonly><br>
     </div>
 </div>
 </body>

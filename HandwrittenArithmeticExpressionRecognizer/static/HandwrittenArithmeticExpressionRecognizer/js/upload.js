@@ -16,16 +16,14 @@ window.onload = function () {
     // 提交按钮绑定事件
     $("#submit").click(function () {
         // 调用后端识别函数
-        res1.value = "(4 + 6) * 3";
-        res2.value = "30";
+        res1.value = "(4 + 6)";
+        res2.value = "10";
     });
     // 清除按钮绑定事件
     $("#clear").click(function () {
         img.src = "";
         clear();
     });
-
-
 };
 
 function change_pic(obj) {
