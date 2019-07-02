@@ -26,7 +26,7 @@ SYMBOL = {0: '0',
           15: ')'}
 
 
-class TrainTest(object):
+class MyDateSet(object):
     def __init__(self):
         self.images = None
         self.labels = None
@@ -47,12 +47,12 @@ class TrainTest(object):
         return batch_images, batch_labels
 
 
-class DigitData(object):
+class DataSetGenerator(object):
     def __init__(self):
-        self.train = TrainTest()
-        self.test = TrainTest()
+        self.train = MyDateSet()
+        self.test = MyDateSet()
 
-    def input_data(self):
+    def generate_dataset(self):
         mnist = input_data.read_data_sets("MNIST_data", one_hot=True)
         images = np.r_[mnist.train.images, mnist.test.images]
         labels = np.r_[mnist.train.labels, mnist.test.labels]
@@ -95,8 +95,8 @@ class Model(object):
         return tf.nn.max_pool(x, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding='SAME')
 
     def train_model(self, epoch=21, learning_rate=1e-4, regular_coef=5e-4, model_dir='./model/', model_name='model'):
-        mnist_operator = DigitData()
-        mnist_operator.input_data()
+        mnist_operator = DataSetGenerator()
+        mnist_operator.generate_dataset()
         self.N_BATCH = mnist_operator.train.images.shape[0] // self.BATCH_SIZE
         x = tf.placeholder(tf.float32, [None, 784], name='image_input')
         y = tf.placeholder(tf.float32, [None, self.N_OUTPUT])
@@ -127,12 +127,12 @@ class Model(object):
             b_fc2 = self.bias_variable([self.N_OUTPUT])
             h_fc2 = tf.matmul(h_fc1_drop, w_fc2) + b_fc2
 
-        regularizers = (tf.nn.l2_loss(w_fc1) + tf.nn.l2_loss(b_fc1) + tf.nn.l2_loss(w_fc2) + tf.nn.l2_loss(b_fc1))
+        regularization = (tf.nn.l2_loss(w_fc1) + tf.nn.l2_loss(b_fc1) + tf.nn.l2_loss(w_fc2) + tf.nn.l2_loss(b_fc1))
         prediction = tf.nn.softmax(h_fc2, name="prediction")
         predict_op = tf.argmax(prediction, 1, name="predict_op")
 
         loss = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits_v2(labels=y, logits=prediction))
-        loss_re = loss + regular_coef * regularizers
+        loss_re = loss + regular_coef * regularization
 
         train_step = tf.train.AdamOptimizer(learning_rate).minimize(loss_re)
 
