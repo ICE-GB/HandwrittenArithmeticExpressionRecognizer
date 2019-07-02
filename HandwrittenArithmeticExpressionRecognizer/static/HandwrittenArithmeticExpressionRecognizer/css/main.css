@@ -58,7 +58,7 @@ input[type="file"] {
 
 #show {
     height: 500px;
-    width: 777px;
+    width: 888px;
     margin-top: 8px;
     margin-left: 20px;
 }
@@ -79,6 +79,11 @@ input[type="file"] {
 .file_select {
     position: absolute;
     clip: rect(0 0 0 0);
+}
+
+.lb{
+    font-size: 30px;
+    color: #4cae4c;
 }
 
 .btn_label {
