@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>页面绘制识别</title>
-{#    <script src="../static/HandwrittenArithmeticExpressionRecognizer/js/jquery.min.js"></script>#}
     {% load static %}
-    <script src="{%  static 'HandwrittenArithmeticExpressionRecognizer/js/jquery.min.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'HandwrittenArithmeticExpressionRecognizer/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'HandwrittenArithmeticExpressionRecognizer/css/main.css' %}">
+    <script src="{% static 'HandwrittenArithmeticExpressionRecognizer/js/jquery.min.js' %}"></script>
+    <script src="{% static 'HandwrittenArithmeticExpressionRecognizer/js/hand_write.js' %}"></script>
 </head>
 <style>
     body {
@@ -13,23 +15,20 @@
         padding: 0;
     }
 </style>
-<body style="background-color:#f0ffff">
-<div id="main" style="width: 410px;height: 410px;margin-left: 100px;margin-top:100px;">
-    <h3>请绘制数学算式</h3>
+<body id="body_branch">
+<div id="div_main">
+    <h4>请绘制数学算式</h4>
     <canvas id="my_canvas" style="width: 777px;height: 300px;border: 1px solid;">
     </canvas>
-    <button id="submit" style="font-size: 20px">Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;
-    <button id="clear" style="font-size: 20px">Clear</button>
+    <br>
+    <button id="submit" class="btn_2">Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;
+    <button id="clear" class="btn_2">Clear</button>
+    <div id="show_res">
+        <h2>算式识别：</h2>
+        <input type="text" id="res1" value="算式" style="height: 50px;font-size: 30px"><br>
+        <h2>计算结果：</h2>
+        <input type="text" id="res2" value="结果" style="height: 50px;font-size: 30px"><br>
+    </div>
 </div>
-
-<div id="show" style="width: 150px;height: 150px;margin-left: 100px;margin-top: 20px">
-    <h2>算式识别：</h2>
-    <input type="text" id="res1" value="算式" style="height: 50px;font-size: 30px"><br>
-    <h2>计算结果：</h2>
-    <input type="text" id="res2" value="结果" style="height: 50px;font-size: 30px"><br>
-</div>
-<script>
-
-</script>
 </body>
 </html>

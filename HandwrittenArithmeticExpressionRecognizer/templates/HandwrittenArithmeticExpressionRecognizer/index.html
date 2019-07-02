@@ -7,27 +7,22 @@
     <link rel="stylesheet" href="{% static 'HandwrittenArithmeticExpressionRecognizer/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'HandwrittenArithmeticExpressionRecognizer/css/main.css' %}">
     <script src="{% static 'HandwrittenArithmeticExpressionRecognizer/js/jquery.min.js' %}"></script>
-    <script src="{% static 'HandwrittenArithmeticExpressionRecognizer/js/main.js' %}"></script>
+
+    <script src="{% static 'HandwrittenArithmeticExpressionRecognizer/js/index.js' %}"></script>
 </head>
-<body style="background-color: ghostwhite">
+<body class="body_main">
 <div id="head" style="text-align: center">
     <h1>手写算式识别与计算</h1>
 </div>
-<div id="main" style="width: auto">
-    <div id="navigator" style="height: 30%;width: 100%">
-        <h4 style="display: inline;">请选择功能：&nbsp;</h4>
-        <button id="upload">上传图片识别</button>&nbsp;&nbsp;&nbsp;&nbsp;
-        <button id="handwrite">页面绘制识别</button>
+<div id="main">
+    <div id="navigator">
+        <h4 id="h4">功能项：&nbsp;&nbsp;&nbsp;</h4>
+        <button id="upload" class="btn_1">上传图片识别</button>&nbsp;&nbsp;&nbsp;&nbsp;
+        <button id="hand_write" class="btn_1">页面绘制识别</button>
     </div>
-    <iframe id="show_page" style="display: block;height:800px;width:100%;"></iframe>
-    <script>
-        $("#upload").click(function () {
-            $("#show_page").attr("src", "/upload");
-        });
-        $("#handwrite").click(function () {
-            $("#show_page").attr("src", "/hand_write");
-        });
-    </script>
+    <iframe id="show_page">
+        您的浏览器不支持 iframe 标签。
+    </iframe>
 </div>
 </body>
 </html>

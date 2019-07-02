@@ -3,36 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>上传图片识别</title>
-    <style>
-        input[type="text"] {
-            height: 50px;
-            font-size: 30px;
-        }
-    </style>
     {% load static %}
+    <link rel="stylesheet" href="{% static 'HandwrittenArithmeticExpressionRecognizer/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'HandwrittenArithmeticExpressionRecognizer/css/main.css' %}">
     <script src="{% static 'HandwrittenArithmeticExpressionRecognizer/js/jquery.min.js' %}"></script>
+    <script src="{% static 'HandwrittenArithmeticExpressionRecognizer/js/upload.js' %}"></script>
 </head>
-<body style="background-color:#f0ffff">
-<div id="main" style="margin-left: 100px;margin-top:100px;">
-    <h3>请选择您要识别的图片：</h3>
-    <input type="file" id="file_select" size="30">
-    <div id="show_img" style="width:500px;height:300px;margin-top: 10px;">
-
+<body id="body_branch">
+<div id="div_main">
+    <h4>请选择您要识别的图片：</h4>
+    <div id="show_img">
+        <input type="file" id="file" class="file_select" onchange="change_pic(this)" accept="image/*">
+        <label for="file" class='btn btn-success'>Choose a pic</label>
+        <br>
+        <img src="" id="show" alt="">
     </div>
-    <button id="submit" style="font-size: 20px">Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;
-    <button id="clear" style="font-size: 20px">Clear</button>
-    <h2>算式识别：</h2>
-    <input type="text" id="res1" value="算式"><br>
-    <h2>计算结果：</h2>
-    <input type="text" id="res2" value="结果"><br>
-    <script>
-        let fp = document.getElementById('file_select');
-
-        $("#submit").click(function () {
-            alert(1);
-            alert(fp.value);
-        });
-    </script>
+    <button id="submit" class="btn_2">Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;
+    <button id="clear" class="btn_2">Clear</button>
+    <div id="show_res">
+        <h2>算式识别：</h2>
+        <input type="text" id="res1"><br>
+        <h2>计算结果：</h2>
+        <input type="text" id="res2"><br>
+    </div>
 </div>
 </body>
 </html>
