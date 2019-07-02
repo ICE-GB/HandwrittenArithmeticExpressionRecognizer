@@ -9,16 +9,16 @@ window.onload = function () {
     let ctx1 = my_canvas.getContext("2d");
 
     function init_canvas() {
-        my_canvas.width = 777;
-        my_canvas.height = 300;
+        my_canvas.width = 888;
+        my_canvas.height = 500;
 
-        // 绘制画布背景为白色（默认为透明色）
+        // 绘制画布背景为黑色（默认为透明色）
         ctx1.fillStyle = "#000000";
-        ctx1.fillRect(0, 0, 777, 300);
-        // // 绘制画布边框为黑色
+        ctx1.fillRect(0, 0, 888, 500);
+        // // 绘制画布边框为白色
         // ctx1.strokeStyle = "#000000";
-        ctx1.lineWidth = 1;
-        ctx1.strokeRect(0, 0, 777, 300);
+        // ctx1.lineWidth = 1;
+        // ctx1.strokeRect(0, 0, 776, 499);
 
         res1.value = '';
         res2.value = '';
@@ -39,9 +39,8 @@ window.onload = function () {
         // 获取落笔点的相对于画布的相对坐标位置
         let x = left - canvas_X;
         let y = top - canvas_Y;
-
-        // 定义画笔粗细 粗些较易识别
-        ctx1.lineWidth = 5;
+        // 定义画笔粗细
+        ctx1.lineWidth = 6;
         ctx1.strokeStyle = '#ffffff';
         // 定义画笔的落笔点坐标位置
         ctx1.beginPath();
@@ -76,8 +75,8 @@ window.onload = function () {
     // 提交按钮绑定事件
     $("#submit").click(function () {
         // 调用后端识别函数
-        res1.value = "(4 + 6) * 3";
-        res2.value = "30";
+        res1.value = "(4 + 6) * 4";
+        res2.value = "40";
     });
     // 清除按钮绑定事件
     $("#clear").click(function () {
