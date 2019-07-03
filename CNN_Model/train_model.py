@@ -16,7 +16,7 @@ tf.app.flags.DEFINE_integer(
 )
 
 tf.app.flags.DEFINE_integer(
-    'EPOCH',
+    'epoch',
     201,
     '训练轮次'
 )
@@ -45,7 +45,7 @@ FLAGS = tf.app.flags.FLAGS
 
 def main(_):
     my_model = Model(batch_size=FLAGS.batch_size, hidden_size=FLAGS.hidden_size)
-    my_model.train_model(epoch=FLAGS.EPOCH, learning_rate=FLAGS.learning_rate,
+    my_model.train_model(epoch=FLAGS.epoch, learning_rate=FLAGS.learning_rate,
                          regular_coef=FLAGS.regular_coef, model_dir=FLAGS.model_dir, model_name=FLAGS.model_name)
 
 
