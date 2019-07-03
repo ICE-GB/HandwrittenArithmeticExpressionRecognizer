@@ -78,13 +78,13 @@ class DataSetGenerator(object):
             self.train.images, self.test.images = images[train_index], images[test_index]
             self.train.labels, self.test.labels = labels[train_index], labels[test_index]
 
-    def save_dataset(self):
-        self.train.save_dataset('mnist_op_train_dataset')
-        self.test.save_dataset('mnist_op_test_dataset')
+    def save_dataset(self, save_dir='./'):
+        self.train.save_dataset(save_dir + 'mnist_op_train_dataset')
+        self.test.save_dataset(save_dir + 'mnist_op_test_dataset')
 
-    def load_dataset(self):
-        self.train.load_dataset('mnist_op_train_dataset')
-        self.test.load_dataset('mnist_op_test_dataset')
+    def load_dataset(self, save_dir='./'):
+        self.train.load_dataset(save_dir + 'mnist_op_train_dataset')
+        self.test.load_dataset(save_dir + 'mnist_op_test_dataset')
 
 
 if __name__ == '__main__':
