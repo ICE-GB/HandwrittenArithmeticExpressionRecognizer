@@ -9,16 +9,12 @@ window.onload = function () {
     let ctx1 = my_canvas.getContext("2d");
 
     function init_canvas() {
-        my_canvas.width = 888;
-        my_canvas.height = 500;
+        my_canvas.width = 1000;
+        my_canvas.height = 625;
 
         // 绘制画布背景为黑色（默认为透明色）
         ctx1.fillStyle = "#000000";
-        ctx1.fillRect(0, 0, 888, 500);
-        // // 绘制画布边框为白色
-        // ctx1.strokeStyle = "#000000";
-        // ctx1.lineWidth = 1;
-        // ctx1.strokeRect(0, 0, 776, 499);
+        ctx1.fillRect(0, 0, 1000, 625);
 
         res1.value = '';
         res2.value = '';

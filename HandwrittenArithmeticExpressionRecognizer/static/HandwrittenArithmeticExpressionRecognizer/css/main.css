@@ -36,52 +36,51 @@ input[type="file"] {
 }
 
 #div_main {
-    margin-left: 50px;
-    margin-top: 50px;
+    margin-left: 30px;
+    margin-top: 30px;
     display: inline-block;
 }
 
 #show_left {
-    width: 800px;
+    width: 1111px;
     height: 100%;
     float: left;
     display: inline-block;
 }
 
 #my_canvas {
-    height: 500px;
-    width: 888px;
+    width: 1000px;
+    height: 625px;
     margin-top: 8px;
     margin-left: 20px;
     border: 1px solid;
 }
 
 #show {
-    height: 500px;
-    width: 888px;
-    margin-top: 8px;
-    margin-left: 20px;
+    width: auto;
+    height: auto;
+    max-width: 1000px;
+    max-height: 625px;
 }
 
 #show_img {
-    height: 520px;
-    width: 888px;
+    height: 650px;
+    width: 1000px;
 }
 
 #show_res {
-    margin-top: 150px;
-    margin-left: 250px;
+    margin-top: 200px;
+    margin-left: 100px;
     float: left;
     display: inline-block;
 }
-
 
 .file_select {
     position: absolute;
     clip: rect(0 0 0 0);
 }
 
-.lb{
+.lb {
     font-size: 30px;
     color: #4cae4c;
 }
