@@ -51,5 +51,5 @@ def main(_):
 
 if __name__ == '__main__':
     np.random.seed(0)
-    tf.set_random_seed(0)
-    tf.app.run()
+    tf.compat.v1.set_random_seed(0)
+    tf.compat.v1.app.run()
