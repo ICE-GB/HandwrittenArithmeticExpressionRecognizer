@@ -33,7 +33,7 @@ class Model(object):
 
     def train_model(self, epoch=21, learning_rate=1e-4, regular_coef=5e-4, model_dir='./model/', model_name='model'):
         mnist_operator = DataSetGenerator()
-        mnist_operator.load_dataset(save_dir='./utils/')
+        mnist_operator.load_dataset()
         self.N_BATCH = mnist_operator.train.images.shape[0] // self.BATCH_SIZE
         x = tf.compat.v1.placeholder(tf.float32, [None, 784], name='image_input')
         y = tf.compat.v1.placeholder(tf.float32, [None, self.N_OUTPUT])
