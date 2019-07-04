@@ -1,4 +1,5 @@
 import base64
+import json
 
 import cv2
 from django.contrib.staticfiles import finders
@@ -33,7 +34,7 @@ def get_result(request):
         f.write(img)
     # images_s = image_process(img_path)
     data = cv2.imread('./target.png', 2)
-    images_s = get_image_cuts(data, is_data=True, n_lines=1, data_needed=True)
+    images_s = get_image_cuts(data, is_data=True, n_lines=2, data_needed=True)
     meta = finders.find('HandwrittenArithmeticExpressionRecognizer/model/model-200.meta')
     path = finders.find('HandwrittenArithmeticExpressionRecognizer/model/')
     cnn_model = Model()
@@ -60,4 +61,9 @@ def get_result(request):
     print(equations)
     print(results)
     # print(haer)
-    return JsonResponse({"expression": equations, "result": results}, safe=False)
+    json_data = {
+        "result": results,
+        "expression": equations,
+        "test": 'test'
+    }
+    return JsonResponse(json_data, safe=False)

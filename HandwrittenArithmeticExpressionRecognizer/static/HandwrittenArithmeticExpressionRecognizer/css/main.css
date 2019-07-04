@@ -1,6 +1,7 @@
 body {
     margin: 0;
     padding: 0;
+    width: 1900px;
 }
 
 input[type="text"] {
@@ -23,10 +24,9 @@ input[type="file"] {
 }
 
 #body_branch {
-    /*background: transparent;*/
-    /*background-color: white;*/
     background: url('../img/bg1.jpg');
     background-size: 100%;
+    width: 1800px;
 }
 
 #navigator {
