@@ -13,7 +13,7 @@ window.onload = function () {
         my_canvas.height = 625;
 
         // 绘制画布背景为黑色（默认为透明色）
-        ctx1.fillStyle = "#FFFFFF";
+        ctx1.fillStyle = "#FFFFFF"
         ctx1.fillRect(0, 0, 1000, 625);
 
         res1.value = '';
