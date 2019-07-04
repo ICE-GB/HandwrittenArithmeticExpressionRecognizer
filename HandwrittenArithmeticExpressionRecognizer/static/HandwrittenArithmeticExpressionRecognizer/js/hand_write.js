@@ -76,9 +76,12 @@ window.onload = function () {
         img.src = my_canvas.toDataURL();
         let img_data = img.src.substring(22);
         console.log(img_data);
-        $.post('get_result', {"img_data": img_data.toLocaleString()}, function (json, textStatus) {
-            $("#res1").text(json["expression"]);
-            $("#res2").text(json["result"]);
+        $.post('get_result', {"img_data": img_data.toLocaleString()}, function (json_response) {
+            let json = JSON.parse(json_response);
+            console.log(json["expression"][0][0]);
+            console.log(json["result"][0][0]);
+            res1.value = json["expression"][0][0];
+            res2.value = json["result"][0][0];
         });
     });
     // 清除按钮绑定事件

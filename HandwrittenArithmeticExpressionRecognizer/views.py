@@ -1,4 +1,5 @@
 import base64
+import json
 
 import cv2
 from django.contrib.staticfiles import finders
@@ -60,4 +61,9 @@ def get_result(request):
     print(equations)
     print(results)
     # print(haer)
-    return JsonResponse({"expression": equations, "result": results}, safe=False)
+    json_data = {
+        "result": results,
+        "expression": equations,
+        "test": 'test'
+    }
+    return JsonResponse(json_data, safe=False)

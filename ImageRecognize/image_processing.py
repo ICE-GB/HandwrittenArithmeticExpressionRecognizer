@@ -1,6 +1,5 @@
 import numpy as np
 import queue
-from tqdm import tqdm
 import cv2
 import os
 
@@ -15,7 +14,6 @@ def get_list_files(path):
 
 def get_x_y_cuts(data, n_lines=1):
     w, h = data.shape
-    print(data)
     visited = set()
     q = queue.Queue()
     offset = [(-1, -1), (0, -1), (1, -1), (-1, 0), (1, 0), (-1, 1), (0, 1), (1, 1)]
@@ -96,7 +94,6 @@ def get_x_y_cuts(data, n_lines=1):
 
     if n_lines == 2:
         cuts = sorted(cuts, key=lambda cut_y: cut_y[0])
-        print(cuts)
         cuts_s = []
         cuts_start = 0
         for i in range(len(cuts) - 1):
@@ -119,11 +116,9 @@ def get_image_cuts(image, img_cut_dir='./', is_data=False, n_lines=1, data_neede
         data = image
     else:
         data = cv2.imread(image, 2)
-    cutss = get_x_y_cuts(data, n_lines=n_lines)
-    print(cutss)
+    cuts_s = get_x_y_cuts(data, n_lines=n_lines)
     image_cuts_s = []
-    for cuts in cutss:
-        print(cuts)
+    for cuts in cuts_s:
         image_cuts = None
         for i, item in enumerate(cuts):
             count += 1
@@ -143,40 +138,12 @@ def get_image_cuts(image, img_cut_dir='./', is_data=False, n_lines=1, data_neede
                 cv2.imwrite(img_cut_dir + str(count) + ".jpg", standard_data)
                 print('save successful')
             if data_needed:
-                cv2.imwrite(img_cut_dir + str(count) + ".jpg", standard_data)
-                print('save successful')
                 data_flat = (255 - np.resize(standard_data, (1, 28 * 28))) / 255
                 if image_cuts is None:
                     image_cuts = data_flat
                 else:
                     image_cuts = np.r_[image_cuts, data_flat]
-                print(image_cuts.shape)
         image_cuts_s.append(image_cuts)
-        # print(image_cuts_s)
     if data_needed:
         return image_cuts_s
     return count
-
-
-def get_images_labels():
-    operators = ['plus', 'sub', 'mul', 'div', '(', ')']
-    images = None
-    labels = None
-    for i, op in enumerate(operators):
-        image_file_list = get_list_files('./cfs/' + op + '/')
-        print('Loading the ' + op + ' operator...')
-        for filename in tqdm(image_file_list):
-            image = cv2.imread(filename, 2)
-            if image.shape != (28, 28):
-                image = cv2.resize(image, (28, 28))
-            image = np.resize(image, (1, 28 * 28))
-            image = (255 - image) / 255
-            label = np.zeros((1, 10 + len(operators)))
-            label[0][10 + i] = 1
-            if images is None:
-                images = image
-                labels = label
-            else:
-                images = np.r_[images, image]
-                labels = np.r_[labels, label]
-    return images, labels
