@@ -1,5 +1,4 @@
 import base64
-import json
 
 import cv2
 from django.contrib.staticfiles import finders
@@ -41,26 +40,20 @@ def get_result(request):
     cnn_model.load_model(meta, path)
     equations = []
     results = []
-    haer = ''
     for images in images_s:
         equation = ''
         result = ''
         digits = list(cnn_model.predict(images))
-        # print(digits)
         for d in digits:
             equation += SYMBOL[d]
-        # print(equation)
         try:
             result += str(eval(equation))
         except Exception as e:
-            # print(e)
             result += '?    --' + str(e)
         equations.append([equation])
         results.append([result])
-        haer += equation + '=' + result + '\n'
     print(equations)
     print(results)
-    # print(haer)
     json_data = {
         "result": results,
         "expression": equations,

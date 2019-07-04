@@ -18,7 +18,7 @@ def image_cut(point, thresh):
                 img_predict = thresh[x_sorted[j][1]:x_sorted[j][1] + x_sorted[j][3]
                 , x_sorted[j][0]: x_sorted[j][0] + x_sorted[j][2]]
             else:
-                if abs(x_sorted[j + 1][0] - x_sorted[j + 2][0]) < 10:
+                if abs(x_sorted[j + 1][0] - x_sorted[j + 2][0]) < 50:
                     if x_sorted[j + 1][1] > x_sorted[j + 2][1]:
                         img_predict = thresh[x_sorted[j + 2][1]:x_sorted[j + 1][1] + x_sorted[j + 1][3],
                                       x_sorted[j][0]: x_sorted[j][0] + x_sorted[j][2]]
@@ -33,8 +33,7 @@ def image_cut(point, thresh):
                         img_predict = thresh[x_sorted[j][1]:x_sorted[j][1] + x_sorted[j][3]
                         , x_sorted[j][0]: x_sorted[j][0] + x_sorted[j][2]]
                         temp = -10000
-            plt.imshow(img_predict, 'gray')
-            plt.show()
+
             top, bottom, left, right = 0, 0, 0, 0
             height, width = img_predict.shape
             k = height - width
@@ -49,6 +48,8 @@ def image_cut(point, thresh):
 
             tmp = cv2.copyMakeBorder(tmp, 30, 30, 30, 30,
                                      cv2.BORDER_CONSTANT, value=(0, 0, 0))
+            plt.imshow(tmp, 'gray')
+            plt.show()
             # *******************   变为28*28  ************************
             tmp = cv2.resize(tmp, (28, 28))
             tmp = np.reshape(tmp, 784)

@@ -37,6 +37,7 @@ window.onload = function () {
         let y = top - canvas_Y;
         // 定义画笔粗细
         ctx1.lineWidth = 16;
+        ctx1.lineCap = "round";
         ctx1.strokeStyle = '#000000';
         // 定义画笔的落笔点坐标位置
         ctx1.beginPath();
