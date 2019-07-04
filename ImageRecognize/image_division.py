@@ -62,7 +62,8 @@ def image_process(path):
 
     ret, thresh2 = cv2.threshold(GrayImage, 130, 255, cv2.THRESH_BINARY_INV)  # 图像二值化
 
-    image, contours, hierarchy = cv2.findContours(thresh2, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_TC89_KCOS)  # 寻找轮廓
+    # image, contours, hierarchy = cv2.findContours(thresh2, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_TC89_KCOS)  # 寻找轮廓
+    contours, hierarchy = cv2.findContours(thresh2, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_TC89_KCOS)  # 寻找轮廓
 
 
 
@@ -77,7 +78,7 @@ def image_process(path):
         row_number += 1  # 当前行的字符数量+1
         try:
             x_next, y_next, w_next, h_next = cv2.boundingRect(contours[i + 1])  # 获取下一个轮廓矩形框的左上角顶点坐标
-            if abs(y - y_next) > 300:  # 判断下一个字符与当前字符是否在同一行
+            if abs(y - y_next) > h:  # 判断下一个字符与当前字符是否在同一行
                 if len(points) == 1:
                     points = []
                     pass
@@ -102,4 +103,4 @@ def image_process(path):
 
 
 if __name__ == '__main__':
-    image_process('./test3.jpg')
+    image_process('./001.png')
