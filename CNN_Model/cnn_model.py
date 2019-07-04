@@ -102,8 +102,8 @@ class Model(object):
         saver.restore(self.sess, tf.train.latest_checkpoint(path))
 
     def predict(self, x):
-        predict = tf.get_collection('predict_op')[0]
-        graph = tf.get_default_graph()
+        predict = tf.compat.v1.get_collection('predict_op')[0]
+        graph = tf.compat.v1.get_default_graph()
         input_x = graph.get_operation_by_name("image_input").outputs[0]
         rate = graph.get_operation_by_name("rate").outputs[0]
         return self.sess.run(predict, feed_dict={input_x: x, rate: 0.0})[0:]
