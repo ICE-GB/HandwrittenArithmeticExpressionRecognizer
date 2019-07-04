@@ -46,6 +46,9 @@ def image_cut(point, thresh):
                 right = k - left
             tmp = cv2.copyMakeBorder(img_predict, top, bottom, left, right,
                                      cv2.BORDER_CONSTANT, value=(0, 0, 0))
+
+            tmp = cv2.copyMakeBorder(tmp, 30, 30, 30, 30,
+                                     cv2.BORDER_CONSTANT, value=(0, 0, 0))
             # *******************   变为28*28  ************************
             tmp = cv2.resize(tmp, (28, 28))
             tmp = np.reshape(tmp, (1, 784))
