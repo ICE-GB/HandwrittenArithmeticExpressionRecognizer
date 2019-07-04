@@ -17,11 +17,16 @@ input[type="file"] {
 }
 
 #body_main {
-    background-color: ghostwhite;
+    background-color: aliceblue;
+    /*background-image: url("../img/bg1.png");*/
+    /*background-size: 100%;*/
 }
 
 #body_branch {
-    background-color: #f0ffff;
+    /*background: transparent;*/
+    /*background-color: white;*/
+    background: url('../img/bg1.jpg');
+    background-size: 100%;
 }
 
 #navigator {

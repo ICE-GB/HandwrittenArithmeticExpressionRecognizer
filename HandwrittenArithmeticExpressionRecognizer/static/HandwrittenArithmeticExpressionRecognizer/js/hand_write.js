@@ -13,7 +13,7 @@ window.onload = function () {
         my_canvas.height = 625;
 
         // 绘制画布背景为黑色（默认为透明色）
-        ctx1.fillStyle = "#000000";
+        ctx1.fillStyle = "#ffffff";
         ctx1.fillRect(0, 0, 1000, 625);
 
         res1.value = '';
@@ -37,7 +37,7 @@ window.onload = function () {
         let y = top - canvas_Y;
         // 定义画笔粗细
         ctx1.lineWidth = 6;
-        ctx1.strokeStyle = '#ffffff';
+        ctx1.strokeStyle = '#000000';
         // 定义画笔的落笔点坐标位置
         ctx1.beginPath();
         // ctx1.moveTo(location.x, location.y);
