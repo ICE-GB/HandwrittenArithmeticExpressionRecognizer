@@ -98,7 +98,7 @@ class Model(object):
                     saver.save(sess, model_dir + '/' + model_name, global_step=epoch)
 
     def load_model(self, meta, path):
-        saver = tf.train.import_meta_graph(meta)
+        saver = tf.compat.v1.train.import_meta_graph(meta)
         saver.restore(self.sess, tf.train.latest_checkpoint(path))
 
     def predict(self, x):

@@ -13,7 +13,7 @@ window.onload = function () {
         my_canvas.height = 625;
 
         // 绘制画布背景为黑色（默认为透明色）
-        ctx1.fillStyle = "#000000";
+        ctx1.fillStyle = "#FFFFFF";
         ctx1.fillRect(0, 0, 1000, 625);
 
         res1.value = '';
@@ -36,8 +36,8 @@ window.onload = function () {
         let x = left - canvas_X;
         let y = top - canvas_Y;
         // 定义画笔粗细
-        ctx1.lineWidth = 6;
-        ctx1.strokeStyle = '#ffffff';
+        ctx1.lineWidth = 16;
+        ctx1.strokeStyle = '#000000';
         // 定义画笔的落笔点坐标位置
         ctx1.beginPath();
         // ctx1.moveTo(location.x, location.y);
@@ -71,8 +71,15 @@ window.onload = function () {
     // 提交按钮绑定事件
     $("#submit").click(function () {
         // 调用后端识别函数
-        res1.value = "(4 + 6) * 4";
-        res2.value = "40";
+        let my_canvas = document.getElementById('my_canvas');
+        let img = new Image();
+        img.src = my_canvas.toDataURL();
+        let img_data = img.src.substring(22);
+        console.log(img_data);
+        $.post('get_result', {"img_data": img_data.toLocaleString()}, function (json, textStatus) {
+            $("#res1").text(json["expression"]);
+            $("#res2").text(json["result"]);
+        });
     });
     // 清除按钮绑定事件
     $("#clear").click(function () {

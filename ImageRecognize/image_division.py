@@ -18,7 +18,7 @@ def image_cut(point, thresh):
                 img_predict = thresh[x_sorted[j][1]:x_sorted[j][1] + x_sorted[j][3]
                 , x_sorted[j][0]: x_sorted[j][0] + x_sorted[j][2]]
             else:
-                if abs(x_sorted[j + 1][0] - x_sorted[j + 2][0]) < 50:
+                if abs(x_sorted[j + 1][0] - x_sorted[j + 2][0]) < 10:
                     if x_sorted[j + 1][1] > x_sorted[j + 2][1]:
                         img_predict = thresh[x_sorted[j + 2][1]:x_sorted[j + 1][1] + x_sorted[j + 1][3],
                                       x_sorted[j][0]: x_sorted[j][0] + x_sorted[j][2]]
@@ -33,8 +33,8 @@ def image_cut(point, thresh):
                         img_predict = thresh[x_sorted[j][1]:x_sorted[j][1] + x_sorted[j][3]
                         , x_sorted[j][0]: x_sorted[j][0] + x_sorted[j][2]]
                         temp = -10000
-            # plt.imshow(img_predict, 'gray')
-            #             # plt.show()
+            plt.imshow(img_predict, 'gray')
+            plt.show()
             top, bottom, left, right = 0, 0, 0, 0
             height, width = img_predict.shape
             k = height - width
@@ -48,8 +48,9 @@ def image_cut(point, thresh):
                                      cv2.BORDER_CONSTANT, value=(0, 0, 0))
             # *******************   变为28*28  ************************
             tmp = cv2.resize(tmp, (28, 28))
-            tmp = np.reshape(tmp, (1, 784))
-            img_cuts.append(tmp)
+            tmp = np.reshape(tmp, 784)
+            print(tmp.shape)
+            img_cuts.append(tmp.tolist())
     return img_cuts
 
 
@@ -65,12 +66,11 @@ def image_process(path):
     # image, contours, hierarchy = cv2.findContours(thresh2, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_TC89_KCOS)  # 寻找轮廓
     contours, hierarchy = cv2.findContours(thresh2, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_TC89_KCOS)  # 寻找轮廓
 
-
-
     points = []  # 记录每个轮廓左上角顶点
 
     row_number = 0  # 记录每行字符的个数
     result = []  # 识别结果
+    cuts = []
 
     for i in range(len(contours)):
         x, y, w, h = cv2.boundingRect(contours[i])  # 将每个轮廓用矩形框框出来
@@ -81,26 +81,27 @@ def image_process(path):
             if abs(y - y_next) > h:  # 判断下一个字符与当前字符是否在同一行
                 if len(points) == 1:
                     points = []
-                    pass
                 else:
-                    cuts = image_cut(points, thresh2)
+                    cuts.append(image_cut(points, thresh2))
 
-                    cal_result = recognize.recognize(cuts)
-                    row_number = 0
-                    points = []
-                    im = cv2.putText(im, cal_result, (x + w, y + h),
-                                     cv2.FONT_HERSHEY_SIMPLEX, 12, (255, 0, 0), 3)
+                    # cal_result = recognize.recognize(cuts)
+                    # row_number = 0
+                    # points = []
+                    # im = cv2.putText(im, cal_result, (x + w, y + h),
+                    #                  cv2.FONT_HERSHEY_SIMPLEX, 12, (255, 0, 0), 3)
         except IndexError:
-            cuts = image_cut(points, thresh2)
-            cal_result = recognize.recognize(cuts)
-            row_number = 0
-            points = []
-            im = cv2.putText(im, cal_result, (x + w, y + h),
-                             cv2.FONT_HERSHEY_SIMPLEX, 12, (255, 0, 0), 3)
+            cuts.append(image_cut(points, thresh2))
+            # cal_result = recognize.recognize(cuts)
+            # row_number = 0
+            # points = []
+            # im = cv2.putText(im, cal_result, (x + w, y + h),
+            #                  cv2.FONT_HERSHEY_SIMPLEX, 12, (255, 0, 0), 3)
 
-    plt.imshow(thresh2, 'gray')
-    plt.show()
+    # plt.imshow(thresh2, 'gray')
+    # plt.show()
+    print(cuts)
+    return cuts
 
 
 if __name__ == '__main__':
-    image_process('./001.png')
+    image_process('./target.png')
