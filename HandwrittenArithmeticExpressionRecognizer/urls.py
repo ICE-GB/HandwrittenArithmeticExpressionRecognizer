@@ -22,4 +22,5 @@ urlpatterns = [
     path('', views.index),
     path('upload', views.upload),
     path('hand_write', views.hand_write),
+    path('get_result', views.get_result),
 ]
