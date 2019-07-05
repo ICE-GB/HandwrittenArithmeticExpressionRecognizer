@@ -48,8 +48,8 @@ def image_cut(point, thresh):
 
             tmp = cv2.copyMakeBorder(tmp, 30, 30, 30, 30,
                                      cv2.BORDER_CONSTANT, value=(0, 0, 0))
-            # plt.imshow(tmp, 'gray')
-            # plt.show()
+            plt.imshow(tmp, 'gray')
+            plt.show()
             # *******************   变为28*28  ************************
             tmp = cv2.resize(tmp, (28, 28))
             tmp = np.reshape(tmp, 784)
@@ -94,6 +94,26 @@ def extract_div(points, block_w, block_h):
             return points
 
 
+def img_cut_padding(img_cut):
+    top, bottom, left, right = 0, 0, 0, 0
+    height, width = img_cut.shape
+    k = height - width
+    if k < 0:
+        top = abs(k) // 2
+        bottom = abs(k) - top
+    else:
+        left = k // 2
+        right = k - left
+    tmp = cv2.copyMakeBorder(img_cut, top, bottom, left, right,
+                             cv2.BORDER_CONSTANT, value=(0, 0, 0))
+
+    tmp = cv2.copyMakeBorder(tmp, 30, 30, 30, 30,
+                             cv2.BORDER_CONSTANT, value=(0, 0, 0))
+    # plt.imshow(tmp, 'gray')
+    # plt.show()
+    pass
+
+
 def image_process(path):
     im = cv2.imread(path)
 
@@ -134,40 +154,42 @@ def image_process(path):
         finally_points.append(row_points)
     print("最终points", finally_points)
     for row_points in finally_points:
+        img_cut = image_cut(row_points, thresh2)
+        cuts.append(img_cut)
+        print(len(img_cut), img_cut)
         for point in row_points:
             cv2.rectangle(im, (point[0], point[1]), (point[0] + point[2], point[1] + point[3]), (255, 0, 0), 3)
     plt.imshow(im)
     plt.show()
 
-    for i in range(len(contours)):
-        x, y, w, h = cv2.boundingRect(contours[i])  # 将每个轮廓用矩形框框出来
-        points.append((x, y, w, h))  # 将矩形框左上角顶点加入points
-        row_number += 1  # 当前行的字符数量+1
-        try:
-            x_next, y_next, w_next, h_next = cv2.boundingRect(contours[i + 1])  # 获取下一个轮廓矩形框的左上角顶点坐标
-            if abs(y - y_next) > block_h:  # 判断下一个字符与当前字符是否在同一行
-                print("换行")
-                if len(points) == 1:
-                    points = []
-                else:
-                    cuts.append(image_cut(points, thresh2))
+    # for i in range(len(contours)):
+    #     x, y, w, h = cv2.boundingRect(contours[i])  # 将每个轮廓用矩形框框出来
+    #     points.append((x, y, w, h))  # 将矩形框左上角顶点加入points
+    #     row_number += 1  # 当前行的字符数量+1
+    #     try:
+    #         x_next, y_next, w_next, h_next = cv2.boundingRect(contours[i + 1])  # 获取下一个轮廓矩形框的左上角顶点坐标
+    #         if abs(y - y_next) > block_h:  # 判断下一个字符与当前字符是否在同一行
+    #             print("换行")
+    #             if len(points) == 1:
+    #                 points = []
+    #             else:
+    #                 cuts.append(image_cut(points, thresh2))
 
-                    # cal_result = recognize.recognize(cuts)
-                    # row_number = 0
-                    # points = []
-                    # im = cv2.putText(im, cal_result, (x + w, y + h),
-                    #                  cv2.FONT_HERSHEY_SIMPLEX, 12, (255, 0, 0), 3)
-        except IndexError:
-            cuts.append(image_cut(points, thresh2))
-            # cal_result = recognize.recognize(cuts)
-            # row_number = 0
-            # points = []
-            # im = cv2.putText(im, cal_result, (x + w, y + h),
-            #                  cv2.FONT_HERSHEY_SIMPLEX, 12, (255, 0, 0), 3)
-
+    # cal_result = recognize.recognize(cuts)
+    # row_number = 0
+    # points = []
+    # im = cv2.putText(im, cal_result, (x + w, y + h),
+    #                  cv2.FONT_HERSHEY_SIMPLEX, 12, (255, 0, 0), 3)
+    # except IndexError:
+    #     cuts.append(image_cut(points, thresh2))
+    # cal_result = recognize.recognize(cuts)
+    # row_number = 0
+    # points = []
+    # im = cv2.putText(im, cal_result, (x + w, y + h),
+    #                  cv2.FONT_HERSHEY_SIMPLEX, 12, (255, 0, 0), 3)
     # plt.imshow(thresh2, 'gray')
     # plt.show()
-    # print(cuts)
+    print(len(cuts), cuts)
     return cuts
 
 

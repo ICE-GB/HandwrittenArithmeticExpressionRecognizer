@@ -31,9 +31,9 @@ def get_result(request):
     img_path = "./target.png"
     with open(img_path, "wb") as f:
         f.write(img)
-    # images_s = image_process(img_path)
-    data = cv2.imread('./target.png', 2)
-    images_s = get_image_cuts(data, is_data=True, n_lines=1, data_needed=True)
+    images_s = image_process(img_path)
+    # data = cv2.imread('./target.png', 2)
+    # images_s = get_image_cuts(data, is_data=True, n_lines=1, data_needed=True)
     meta = finders.find('HandwrittenArithmeticExpressionRecognizer/model/model-200.meta')
     path = finders.find('HandwrittenArithmeticExpressionRecognizer/model/')
     cnn_model = Model()
