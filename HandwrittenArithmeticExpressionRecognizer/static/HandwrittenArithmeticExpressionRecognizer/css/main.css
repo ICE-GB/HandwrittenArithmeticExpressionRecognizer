@@ -1,11 +1,14 @@
 body {
     margin: 0;
     padding: 0;
+    width: 1900px;
 }
 
-input[type="text"] {
-    height: 50px;
+textarea {
+    height: 250px;
+    width: 300px;
     font-size: 30px;
+    resize:none
 }
 
 input[type="file"] {
@@ -17,11 +20,13 @@ input[type="file"] {
 }
 
 #body_main {
-    background-color: ghostwhite;
+    background-color: aliceblue;
 }
 
 #body_branch {
-    background-color: #f0ffff;
+    background: url('../img/bg1.jpg');
+    background-size: 100%;
+    width: 1800px;
 }
 
 #navigator {
@@ -69,7 +74,7 @@ input[type="file"] {
 }
 
 #show_res {
-    margin-top: 200px;
+    margin-top: 30px;
     margin-left: 100px;
     float: left;
     display: inline-block;

@@ -51,23 +51,3 @@ function getObjectURL(file) {
     }
     return url;
 }
-
-// // 图片格式化
-// function format_img() {
-//     if (document.getElementById("show").clientHeight >= 625) {
-//         document.getElementById("show").style.height = "625px";
-//         document.getElementById("show").style.width = "auto";
-//         document.getElementById("show").style.marginTop = "10px";
-//         let w = 1000 - document.getElementById("show").clientWidth;
-//         document.getElementById("show").style.marginLeft = w / 2 + "px";
-//         // alert(h);
-//     }
-//     if (document.getElementById("show").clientWidth >= 1000) {
-//         document.getElementById("show").style.width = "1000px";
-//         document.getElementById("show").style.height = "auto";
-//         document.getElementById("show").style.marginLeft = "50px";
-//         let h = 650 - document.getElementById("show").clientHeight;
-//         document.getElementById("show").style.marginTop = h / 2 + "px";
-//         // alert(w);
-//     }
-// }
