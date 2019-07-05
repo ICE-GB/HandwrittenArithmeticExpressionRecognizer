@@ -12,22 +12,20 @@
 <body id="body_branch">
 <div id="div_main">
     <div id="show_left">
-        <form action="">
-            <h4>请绘制您要识别的算式</h4>
-            <div id="show_img">
-                <canvas id="my_canvas">
-                </canvas>
-            </div>
-            <input type="button" id="submit" class="btn_2" value="Submit">&nbsp;&nbsp;&nbsp;&nbsp;
-            <input type="button" id="clear" class="btn_2" value="Clear">
-        </form>
+        <h4>请绘制您要识别的算式</h4>
+        <div id="show_img">
+            <canvas id="my_canvas">
+            </canvas>
+        </div>
+        <input type="button" id="submit" class="btn_2" value="Submit">&nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="button" id="clear" class="btn_2" value="Clear">
     </div>
     <div id="show_res">
         <label for="res1" class="lb">算式识别：</label><br>
-        <input type="text" id="res1" readonly>
+        <textarea id="res1"  readonly></textarea>
         <br><br><br><br>
         <label for="res2" class="lb">计算结果：</label><br>
-        <input type="text" id="res2" readonly>
+        <textarea id="res2"  readonly></textarea>
         <br>
     </div>
 </div>

@@ -82,8 +82,12 @@ window.onload = function () {
             let json = JSON.parse(json_response);
             console.log(json["expression"][0][0]);
             console.log(json["result"][0][0]);
-            res1.value = json["expression"][0][0];
-            res2.value = json["result"][0][0];
+            for (let i = 0; i < json["expression"].length; i++) {
+                let exp = res1.value;
+                let res = res2.value;
+                res1.value = exp + json["expression"][i][0] + "\n";
+                res2.value = res + json["result"][i][0] + "\n";
+            }
         });
     });
     // 清除按钮绑定事件
