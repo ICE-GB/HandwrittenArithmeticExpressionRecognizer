@@ -36,6 +36,9 @@ def get_result(request):
     cnn_model.load_model(meta, path)
     equations = []
     results = []
+    if len(images_s) == 0:
+        equations.append([''])
+        results.append(['无法计算，请规范书写算式'])
     for images in images_s:
         equation = ''
         result = ''
@@ -47,7 +50,7 @@ def get_result(request):
         except Exception as e:
             # result += '?    --' + str(e)
             print(e)
-            result += '?'
+            result += '无法计算，请规范书写算式'
         equations.append([equation])
         results.append([result])
     print(equations)

@@ -125,6 +125,9 @@ def image_process(path):
     # image, contours, hierarchy = cv2.findContours(thresh2, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_TC89_KCOS)  # 寻找轮廓
     contours, hierarchy = cv2.findContours(thresh2, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_TC89_KCOS)  # 寻找轮廓
 
+    if len(contours) == 0:
+        return []
+
     points = []  # 记录每个轮廓左上角顶点
     cuts = []  # 返回切割好的图片数据
 
