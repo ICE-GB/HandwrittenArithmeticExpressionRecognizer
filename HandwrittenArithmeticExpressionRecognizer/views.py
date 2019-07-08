@@ -9,7 +9,6 @@ from django.views.decorators.csrf import csrf_exempt
 from CNN_Model.cnn_model import Model
 from CNN_Model.utils.mnist_op_dataset import SYMBOL
 from ImageRecognize.image_division import image_process
-from ImageRecognize.image_processing import get_image_cuts
 
 
 def index(request):
@@ -32,8 +31,6 @@ def get_result(request):
     with open(img_path, "wb") as f:
         f.write(img)
     images_s = image_process(img_path)
-    # data = cv2.imread('./target.png', 2)
-    # images_s = get_image_cuts(data, is_data=True, n_lines=1, data_needed=True)
     meta = finders.find('HandwrittenArithmeticExpressionRecognizer/model/model-200.meta')
     path = finders.find('HandwrittenArithmeticExpressionRecognizer/model/')
     cnn_model = Model()
@@ -49,7 +46,9 @@ def get_result(request):
         try:
             result += str(eval(equation))
         except Exception as e:
-            result += '?    --' + str(e)
+            # result += '?    --' + str(e)
+            print(e)
+            result += '?'
         equations.append([equation])
         results.append([result])
     print(equations)
@@ -57,6 +56,5 @@ def get_result(request):
     json_data = {
         "result": results,
         "expression": equations,
-        "test": 'test'
     }
     return JsonResponse(json_data, safe=False)

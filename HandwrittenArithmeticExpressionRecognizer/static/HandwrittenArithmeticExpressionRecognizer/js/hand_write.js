@@ -60,14 +60,19 @@ window.onload = function () {
             ctx.stroke();
 
             my_canvas.onmouseup = function () {
-                my_canvas.onmouseup = null;
+                //my_canvas.onmouseup = null;
                 my_canvas.onmousemove = null;
             };
             my_canvas.onmouseout = function () {
-                my_canvas.onmouseout = null;
-                my_canvas.onmouseup = null;
+                //my_canvas.onmouseout = null;
+                //my_canvas.onmouseup = null;
                 my_canvas.onmousemove = null;
             };
+            my_canvas.onmouseleave = function () {
+                //my_canvas.onmouseleave = null;
+                //my_canvas.onmouseup = null;
+                my_canvas.onmousemove = null;
+            }
         };
     };
 
@@ -78,11 +83,11 @@ window.onload = function () {
         let img = new Image();
         img.src = my_canvas.toDataURL();
         let img_data = img.src.substring(22);
-        console.log(img_data);
+        // console.log(img_data);
         $.post('get_result', {"img_data": img_data.toLocaleString()}, function (json_response) {
             let json = JSON.parse(json_response);
-            console.log(json["expression"][0][0]);
-            console.log(json["result"][0][0]);
+            // console.log(json["expression"][0][0]);
+            // console.log(json["result"][0][0]);
             for (let i = 0; i < json["expression"].length; i++) {
                 let exp = res1.value;
                 let res = res2.value;

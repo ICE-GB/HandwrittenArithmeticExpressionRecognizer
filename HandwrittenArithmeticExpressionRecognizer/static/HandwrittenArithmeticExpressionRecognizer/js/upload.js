@@ -19,11 +19,11 @@ window.onload = function () {
     $("#submit").click(function () {
         // 调用后端识别函数
         let img_data = img_url_base64.substring(22);
-        console.log(img_data);
+        // console.log(img_data);
         $.post('get_result', {"img_data": img_data.toLocaleString()}, function (json_response) {
             let json = JSON.parse(json_response);
-            console.log(json["expression"][0][0]);
-            console.log(json["result"][0][0]);
+            // console.log(json["expression"][0][0]);
+            // console.log(json["result"][0][0]);
             for (let i = 0; i < json["expression"].length; i++) {
                 let exp = res1.value;
                 let res = res2.value;
