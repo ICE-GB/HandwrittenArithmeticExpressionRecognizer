@@ -6,15 +6,16 @@ window.onload = function () {
     // 获取计算结果框
     let res2 = document.getElementById("res2");
     // 获取主画布2d接口的画笔
-    let ctx1 = my_canvas.getContext("2d");
+    let ctx = my_canvas.getContext("2d");
 
     function init_canvas() {
         my_canvas.width = 1000;
         my_canvas.height = 625;
 
         // 绘制画布背景为黑色（默认为透明色）
-        ctx1.fillStyle = "#FFFFFF"
-        ctx1.fillRect(0, 0, 1000, 625);
+        ctx.fillStyle = "#FFFFFF";
+        ctx.fillRect(0, 0, 1000, 625);
+        drawRoundRect(ctx, 0, 0, 1000, 625, 4);
 
         res1.value = '';
         res2.value = '';
@@ -36,14 +37,14 @@ window.onload = function () {
         let x = left - canvas_X;
         let y = top - canvas_Y;
         // 定义画笔粗细
-        ctx1.lineCap = "round";
-        ctx1.lineWidth = 16;
-        ctx1.lineCap = "round";
-        ctx1.strokeStyle = '#000000';
+        ctx.lineCap = "round";
+        ctx.lineWidth = 16;
+        ctx.lineCap = "round";
+        ctx.strokeStyle = '#000000';
         // 定义画笔的落笔点坐标位置
-        ctx1.beginPath();
-        // ctx1.moveTo(location.x, location.y);
-        ctx1.moveTo(x, y);
+        ctx.beginPath();
+        // ctx.moveTo(location.x, location.y);
+        ctx.moveTo(x, y);
         //鼠标移动操作事件绑定
         my_canvas.onmousemove = function (event) {
             // window.event处理浏览器的兼容性
@@ -55,8 +56,8 @@ window.onload = function () {
             let x = left - canvas_X;
             let y = top - canvas_Y;
             // 定义画笔的落笔点坐标位置
-            ctx1.lineTo(x, y);
-            ctx1.stroke();
+            ctx.lineTo(x, y);
+            ctx.stroke();
 
             my_canvas.onmouseup = function () {
                 my_canvas.onmouseup = null;
@@ -96,3 +97,15 @@ window.onload = function () {
     });
 
 };
+
+function drawRoundRect(cxt, x, y, width, height, radius) {
+    cxt.beginPath();
+    cxt.arc(x + radius, y + radius, radius, Math.PI, Math.PI * 3 / 2);
+    cxt.lineTo(width - radius + x, y);
+    cxt.arc(width - radius + x, radius + y, radius, Math.PI * 3 / 2, Math.PI * 2);
+    cxt.lineTo(width + x, height + y - radius);
+    cxt.arc(width - radius + x, height - radius + y, radius, 0, Math.PI * 1 / 2);
+    cxt.lineTo(radius + x, height + y);
+    cxt.arc(radius + x, height - radius + y, radius, Math.PI * 1 / 2, Math.PI);
+    cxt.closePath();
+}

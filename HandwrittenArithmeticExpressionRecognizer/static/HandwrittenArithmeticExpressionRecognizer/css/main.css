@@ -8,7 +8,8 @@ textarea {
     height: 250px;
     width: 300px;
     font-size: 30px;
-    resize:none
+    resize: none;
+    outline: none;
 }
 
 input[type="file"] {

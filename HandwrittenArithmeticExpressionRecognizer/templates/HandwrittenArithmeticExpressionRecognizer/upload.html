@@ -13,7 +13,7 @@
 <div id="div_main">
     <div id="show_left">
         <h4 id="h4">请选择您要识别的图片&nbsp;&nbsp;&nbsp;</h4>
-        <input type="file" id="file" class="file_select" oninput="show_image(this)" accept="image/*">
+        <input type="file" id="file" class="file_select" oninput="show_image(this)" onchange="url_base64(this)" accept="image/*">
         <label for="file" class='btn btn-success'>Choose a pic</label><br>
         <div id="show_img">
             <img src="" id="show" alt="" onload="img_center(this)">
