@@ -18,10 +18,10 @@ window.onload = function () {
     // 提交按钮绑定事件
     $("#submit").click(function () {
         // 调用后端识别函数
+        loading();
         let img_data = img_url_base64.substring(22);
         // console.log(img_data);
-        $.post('get_result', {"img_data": img_data.toLocaleString()}, function (json_response) {
-            let json = JSON.parse(json_response);
+        $.post('get_result', {"img_data": img_data.toLocaleString()}, function (json) {
             // console.log(json["expression"][0][0]);
             // console.log(json["result"][0][0]);
             for (let i = 0; i < json["expression"].length; i++) {
@@ -30,6 +30,7 @@ window.onload = function () {
                 res1.value = exp + json["expression"][i][0] + "\n";
                 res2.value = res + json["result"][i][0] + "\n";
             }
+            loading_end();
         });
     });
     // 清除按钮绑定事件
@@ -39,6 +40,22 @@ window.onload = function () {
         clear();
     });
 };
+
+// 识别算式过程中的等待弹出层
+function loading() {
+    // 弹出层
+    layer.open({
+        type: 3,
+        title: false,
+        closeBtn: 0,
+        skin: 'layui-layer-nobg', //没有背景色
+    });
+}
+
+// 识别结束后关闭弹出层
+function loading_end() {
+    layer.closeAll('loading');
+}
 
 function url_base64(obj) {
     let reader = new FileReader();
