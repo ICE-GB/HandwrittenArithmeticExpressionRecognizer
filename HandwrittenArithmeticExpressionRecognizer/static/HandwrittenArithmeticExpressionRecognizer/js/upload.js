@@ -16,9 +16,19 @@ window.onload = function () {
     // 提交按钮绑定事件
     $("#submit").click(function () {
         // 调用后端识别函数
-        alert(img_url_base64);
-        res1.value = "(4 + 6)";
-        res2.value = "10";
+        let img_data = img_url_base64.substring(22);
+        console.log(img_data);
+        $.post('get_result', {"img_data": img_data.toLocaleString()}, function (json_response) {
+            let json = JSON.parse(json_response);
+            console.log(json["expression"][0][0]);
+            console.log(json["result"][0][0]);
+            for (let i = 0; i < json["expression"].length; i++) {
+                let exp = res1.value;
+                let res = res2.value;
+                res1.value = exp + json["expression"][i][0] + "\n";
+                res2.value = res + json["result"][i][0] + "\n";
+            }
+        });
     });
     // 清除按钮绑定事件
     $("#clear").click(function () {
@@ -33,7 +43,7 @@ function url_base64(obj) {
     // 这里就是将选择的第一个图片文件转化为base64的码
     reader.readAsDataURL(obj.files[0]);
     reader.onload = function () {
-        console.log(reader.result);  // reader.result是base64码
+        // console.log(reader.result);  // reader.result是base64码
         img_url_base64 = reader.result;
     };
 }
