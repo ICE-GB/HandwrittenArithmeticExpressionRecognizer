@@ -1,6 +1,6 @@
+let img_url_base64 = "";
+
 window.onload = function () {
-    // 获取文件选择
-    let fp = document.getElementById('file');
     // 获取识别结果框
     let res1 = document.getElementById("res1");
     // 获取计算结果框
@@ -16,6 +16,7 @@ window.onload = function () {
     // 提交按钮绑定事件
     $("#submit").click(function () {
         // 调用后端识别函数
+        alert(img_url_base64);
         res1.value = "(4 + 6)";
         res2.value = "10";
     });
@@ -25,6 +26,17 @@ window.onload = function () {
         clear();
     });
 };
+
+function url_base64(obj) {
+    let reader = new FileReader();
+    // filses就是input[type=file]文件列表，files[0]就是第一个文件
+    // 这里就是将选择的第一个图片文件转化为base64的码
+    reader.readAsDataURL(obj.files[0]);
+    reader.onload = function () {
+        console.log(reader.result);  // reader.result是base64码
+        img_url_base64 = reader.result;
+    };
+}
 
 // 图片位置居中
 function img_center(obj) {
