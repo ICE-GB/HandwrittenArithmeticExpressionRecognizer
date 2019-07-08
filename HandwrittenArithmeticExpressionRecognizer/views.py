@@ -1,6 +1,5 @@
 import base64
 
-import cv2
 from django.contrib.staticfiles import finders
 from django.http import JsonResponse
 from django.shortcuts import render
