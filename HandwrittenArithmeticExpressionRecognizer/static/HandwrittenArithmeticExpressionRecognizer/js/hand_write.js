@@ -1,3 +1,6 @@
+// 获取主画布
+let my_canvas = document.getElementById("my_canvas");
+
 window.onload = function () {
     // 获取主画布
     let my_canvas = document.getElementById("my_canvas");
@@ -15,7 +18,6 @@ window.onload = function () {
         // 绘制画布背景为黑色（默认为透明色）
         ctx.fillStyle = "#FFFFFF";
         ctx.fillRect(0, 0, 1000, 625);
-        drawRoundRect(ctx, 0, 0, 1000, 625, 4);
 
         res1.value = '';
         res2.value = '';
@@ -60,17 +62,12 @@ window.onload = function () {
             ctx.stroke();
 
             my_canvas.onmouseup = function () {
-                //my_canvas.onmouseup = null;
                 my_canvas.onmousemove = null;
             };
             my_canvas.onmouseout = function () {
-                //my_canvas.onmouseout = null;
-                //my_canvas.onmouseup = null;
                 my_canvas.onmousemove = null;
             };
             my_canvas.onmouseleave = function () {
-                //my_canvas.onmouseleave = null;
-                //my_canvas.onmouseup = null;
                 my_canvas.onmousemove = null;
             }
         };
@@ -78,14 +75,15 @@ window.onload = function () {
 
     // 提交按钮绑定事件
     $("#submit").click(function () {
+        // 弹出等待层
+        loading();
         // 调用后端识别函数
         let my_canvas = document.getElementById('my_canvas');
         let img = new Image();
         img.src = my_canvas.toDataURL();
         let img_data = img.src.substring(22);
         // console.log(img_data);
-        $.post('get_result', {"img_data": img_data.toLocaleString()}, function (json_response) {
-            let json = JSON.parse(json_response);
+        $.post('get_result', {"img_data": img_data.toLocaleString()}, function (json) {
             // console.log(json["expression"][0][0]);
             // console.log(json["result"][0][0]);
             for (let i = 0; i < json["expression"].length; i++) {
@@ -94,23 +92,31 @@ window.onload = function () {
                 res1.value = exp + json["expression"][i][0] + "\n";
                 res2.value = res + json["result"][i][0] + "\n";
             }
+            loading_end();
         });
     });
     // 清除按钮绑定事件
     $("#clear").click(function () {
         init_canvas();
     });
-
 };
 
-function drawRoundRect(cxt, x, y, width, height, radius) {
-    cxt.beginPath();
-    cxt.arc(x + radius, y + radius, radius, Math.PI, Math.PI * 3 / 2);
-    cxt.lineTo(width - radius + x, y);
-    cxt.arc(width - radius + x, radius + y, radius, Math.PI * 3 / 2, Math.PI * 2);
-    cxt.lineTo(width + x, height + y - radius);
-    cxt.arc(width - radius + x, height - radius + y, radius, 0, Math.PI * 1 / 2);
-    cxt.lineTo(radius + x, height + y);
-    cxt.arc(radius + x, height - radius + y, radius, Math.PI * 1 / 2, Math.PI);
-    cxt.closePath();
+function out_focus() {
+    my_canvas.onmouseleave = null;
+}
+
+// 识别算式过程中的等待弹出层
+function loading() {
+    // 弹出层
+    layer.open({
+        type: 3,
+        title: false,
+        closeBtn: 0,
+        skin: 'layui-layer-nobg', //没有背景色
+    });
+}
+
+// 识别结束后关闭弹出层
+function loading_end() {
+    layer.closeAll('loading');
 }

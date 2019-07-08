@@ -6,15 +6,16 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'HandwrittenArithmeticExpressionRecognizer/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'HandwrittenArithmeticExpressionRecognizer/css/main.css' %}">
-    <script src="{% static 'HandwrittenArithmeticExpressionRecognizer/js/jquery.min.js' %}"></script>
+    <script src="{% static 'HandwrittenArithmeticExpressionRecognizer/js/jquery-3.4.1.min.js' %}"></script>
+    <script src="{% static 'HandwrittenArithmeticExpressionRecognizer/js/layer-v3.1.1/layer/layer.js' %}"></script>
     <script src="{% static 'HandwrittenArithmeticExpressionRecognizer/js/hand_write.js' %}"></script>
 </head>
 <body id="body_branch">
-<div id="div_main">
+<div id="div_branch">
     <div id="show_left">
         <h4>请绘制您要识别的算式</h4>
         <div id="show_img">
-            <canvas id="my_canvas">
+            <canvas id="my_canvas" onblur="out_focus()">
             </canvas>
         </div>
         <input type="button" id="submit" class="btn_2" value="Submit">&nbsp;&nbsp;&nbsp;&nbsp;
@@ -22,10 +23,10 @@
     </div>
     <div id="show_res">
         <label for="res1" class="lb">算式识别：</label><br>
-        <textarea id="res1"  readonly></textarea>
+        <textarea id="res1" readonly></textarea>
         <br><br><br><br>
         <label for="res2" class="lb">计算结果：</label><br>
-        <textarea id="res2"  readonly></textarea>
+        <textarea id="res2" readonly></textarea>
         <br>
     </div>
 </div>

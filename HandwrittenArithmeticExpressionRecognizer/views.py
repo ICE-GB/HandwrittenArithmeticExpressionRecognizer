@@ -10,8 +10,8 @@ from CNN_Model.utils.mnist_op_dataset import SYMBOL
 from ImageRecognize.image_division import image_process
 
 
-def index(request):
-    return render(request, 'HandwrittenArithmeticExpressionRecognizer/index.html')
+def main(request):
+    return render(request, 'HandwrittenArithmeticExpressionRecognizer/main.html')
 
 
 def upload(request):
