@@ -1,6 +1,8 @@
 let img_url_base64 = "";
 
 window.onload = function () {
+    // 获取文件上传组件
+    let fp = document.getElementById("file");
     // 获取识别结果框
     let res1 = document.getElementById("res1");
     // 获取计算结果框
@@ -32,6 +34,7 @@ window.onload = function () {
     });
     // 清除按钮绑定事件
     $("#clear").click(function () {
+        fp.value = "";
         img.src = "";
         clear();
     });
