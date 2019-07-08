@@ -151,14 +151,18 @@ def image_process(path):
     for row_points in row_points_s:
         row_points = sorted(row_points, key=lambda p_x: p_x[0])
         row_points = extract_div(row_points, block_w, block_h)
+        # print("每一行points:", row_points)
         finally_points.append(row_points)
     print("最终points", finally_points)
-    for row_points in finally_points:
-        img_cut = image_cut(row_points, thresh2)
-        cuts.append(img_cut)
-        print(len(img_cut), img_cut)
-        for point in row_points:
-            cv2.rectangle(im, (point[0], point[1]), (point[0] + point[2], point[1] + point[3]), (255, 0, 0), 3)
+    try:
+        for row_points in finally_points:
+            img_cut = image_cut(row_points, thresh2)
+            cuts.append(img_cut)
+            print(len(img_cut), img_cut)
+            for point in row_points:
+                cv2.rectangle(im, (point[0], point[1]), (point[0] + point[2], point[1] + point[3]), (255, 0, 0), 3)
+    except TypeError:
+        print("结束！！！！")
     plt.imshow(im)
     plt.show()
 
@@ -194,4 +198,4 @@ def image_process(path):
 
 
 if __name__ == '__main__':
-    image_process('./005.png')
+    image_process('./test3.jpg')
