@@ -1,23 +1,22 @@
-// 获取主画布
-let my_canvas = document.getElementById("my_canvas");
-
 window.onload = function () {
-    // 获取主画布
+    // 获取画布
     let my_canvas = document.getElementById("my_canvas");
     // 获取识别结果框
     let res1 = document.getElementById("res1");
     // 获取计算结果框
     let res2 = document.getElementById("res2");
-    // 获取主画布2d接口的画笔
+    // 获取画布2d接口的画笔
     let ctx = my_canvas.getContext("2d");
+    // 用于设置画笔颜色的变量
+    let ctx_color = "";
 
     function init_canvas() {
         my_canvas.width = 1000;
-        my_canvas.height = 625;
+        my_canvas.height = 640;
 
-        // 绘制画布背景为黑色（默认为透明色）
+        // 绘制画布背景为白色（默认为透明色）
         ctx.fillStyle = "#FFFFFF";
-        ctx.fillRect(0, 0, 1000, 625);
+        ctx.fillRect(0, 0, 1000, 640);
 
         res1.value = '';
         res2.value = '';
@@ -41,12 +40,24 @@ window.onload = function () {
         // 定义画笔粗细
         ctx.lineCap = "round";
         ctx.lineWidth = 16;
-        ctx.lineCap = "round";
-        ctx.strokeStyle = '#000000';
+        ctx.strokeStyle = ctx_color;
         // 定义画笔的落笔点坐标位置
         ctx.beginPath();
-        // ctx.moveTo(location.x, location.y);
         ctx.moveTo(x, y);
+
+        // 以下三个事件绑定均是为了防止画笔在使用时出现的不按下鼠标自动绘图的bug
+        // 鼠标抬起操作事件绑定
+        my_canvas.onmouseup = function () {
+            my_canvas.onmousemove = null;
+        };
+        // 鼠标移出画布操作事件绑定
+        my_canvas.onmouseout = function () {
+            my_canvas.onmousemove = null;
+        };
+        // 鼠标抬起操作事件绑定
+        my_canvas.onmouseleave = function () {
+            my_canvas.onmousemove = null;
+        };
         //鼠标移动操作事件绑定
         my_canvas.onmousemove = function (event) {
             // window.event处理浏览器的兼容性
@@ -60,18 +71,20 @@ window.onload = function () {
             // 定义画笔的落笔点坐标位置
             ctx.lineTo(x, y);
             ctx.stroke();
-
-            my_canvas.onmouseup = function () {
-                my_canvas.onmousemove = null;
-            };
-            my_canvas.onmouseout = function () {
-                my_canvas.onmousemove = null;
-            };
-            my_canvas.onmouseleave = function () {
-                my_canvas.onmousemove = null;
-            }
         };
     };
+
+    // 画笔按钮绑定事件
+    $("#pen").click(function () {
+        // 设置画笔颜色为黑色
+        ctx_color = "#000000";
+    });
+
+    // 橡皮擦按钮绑定事件
+    $("#eraser").click(function () {
+        // 设置画笔颜色为白色（与背景色相同）
+        ctx_color = "#ffffff";
+    });
 
     // 提交按钮绑定事件
     $("#submit").click(function () {
@@ -100,6 +113,9 @@ window.onload = function () {
         init_canvas();
     });
 };
+
+// 获取主画布
+let my_canvas = document.getElementById("my_canvas");
 
 function out_focus() {
     my_canvas.onmouseleave = null;

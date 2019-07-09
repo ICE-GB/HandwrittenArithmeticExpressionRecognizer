@@ -18,10 +18,16 @@
             <canvas id="my_canvas" onblur="out_focus()">
             </canvas>
         </div>
-        <input type="button" id="submit" class="btn_2" value="Submit">&nbsp;&nbsp;&nbsp;&nbsp;
-        <input type="button" id="clear" class="btn_2" value="Clear">
+        <div class="tools" style="margin-top: 10px">
+            <div class="container">
+                <button class="pen" id="pen" title="画笔"></button>
+                <button class="eraser" id="eraser" title="橡皮擦"></button>
+                <button class="clear" id="clear" title="清除"></button>
+                <button class="submit" id="submit" title="提交"></button>
+            </div>
+        </div>
     </div>
-    <div id="show_res">
+    <div id="show_res" style="margin-top: 25px">
         <label for="res1" class="lb">算式识别：</label><br>
         <textarea id="res1" readonly></textarea>
         <br><br><br><br>
