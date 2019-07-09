@@ -59,7 +59,9 @@ h4 {
     margin-top: 30px;
     display: inline-block;
 }
-
+#div_head{
+    text-align: center;
+}
 #show_left {
     width: 1111px;
     height: 100%;

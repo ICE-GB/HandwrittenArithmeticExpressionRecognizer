@@ -10,6 +10,9 @@ window.onload = function () {
     // 用于设置画笔颜色的变量
     let ctx_color = "";
 
+    // 设置画布默认cursor
+    my_canvas.style.cursor = "url('static/HandwrittenArithmeticExpressionRecognizer/img/pen_use.png')0 32,auto";
+
     function init_canvas() {
         my_canvas.width = 1000;
         my_canvas.height = 640;
@@ -78,12 +81,16 @@ window.onload = function () {
     $("#pen").click(function () {
         // 设置画笔颜色为黑色
         ctx_color = "#000000";
+        // 设置画布cursor为画笔
+        my_canvas.style.cursor = "url('static/HandwrittenArithmeticExpressionRecognizer/img/pen_use.png')0 32,auto";
     });
 
     // 橡皮擦按钮绑定事件
     $("#eraser").click(function () {
         // 设置画笔颜色为白色（与背景色相同）
         ctx_color = "#ffffff";
+        // 设置画布cursor为圆形橡皮擦
+        my_canvas.style.cursor = "url('static/HandwrittenArithmeticExpressionRecognizer/img/eraser_use.png')16 16,auto";
     });
 
     // 提交按钮绑定事件
@@ -113,13 +120,6 @@ window.onload = function () {
         init_canvas();
     });
 };
-
-// 获取主画布
-let my_canvas = document.getElementById("my_canvas");
-
-function out_focus() {
-    my_canvas.onmouseleave = null;
-}
 
 // 识别算式过程中的等待弹出层
 function loading() {
