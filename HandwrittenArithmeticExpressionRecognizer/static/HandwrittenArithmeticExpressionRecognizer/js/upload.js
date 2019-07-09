@@ -19,6 +19,12 @@ window.onload = function () {
     $("#submit").click(function () {
         // 调用后端识别函数
         loading();
+        if (img_url_base64 === '') {
+            res1.value = '';
+            res2.value = '无法计算，请规范书写算式\n';
+            loading_end();
+            return;
+        }
         let img_data = img_url_base64.substring(22);
         // console.log(img_data);
         $.post('get_result', {"img_data": img_data.toLocaleString()}, function (json) {
@@ -37,6 +43,7 @@ window.onload = function () {
     $("#clear").click(function () {
         fp.value = "";
         img.src = "";
+        img_url_base64 = "";
         clear();
     });
 };

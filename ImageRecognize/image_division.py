@@ -37,6 +37,7 @@ def extract_div(points, block_w, block_h):
             # print(i, "提取除号", points)
             points = extract_div(points, block_w, block_h)
             return points
+    return points
 
 
 def image_cut(point, thresh):
