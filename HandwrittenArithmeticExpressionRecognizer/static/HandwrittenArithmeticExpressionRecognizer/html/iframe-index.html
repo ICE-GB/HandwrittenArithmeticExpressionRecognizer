@@ -2,186 +2,26 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>HTML5 Canvas文字放射状线条动画DEMO演示</title>
-
+    <title></title>
     <style>
+        html,body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
         body {
-            background: rgba(255,255,255,0.5);
-            overflow: hidden
-        }</style>
+            background: rgba(255, 255, 255, 0.5);
+            text-align: center;
+        }
+        img {
+            position: relative;
+            top: calc(50% - 275px);
+
+        }
+    </style>
 </head>
 <body>
-<canvas id="canvas"></canvas>
-
-<script>
-    let txt = "手写算式识别及计算";
-    let txtH = 100;
-    let font = "simsun";
-    let bg = "#000";
-    let rayColor1 = "#70a1ff";
-    let rayColor2 = "#70a1ff";
-    let fade = 1000;
-
-    let canvas = document.getElementById("canvas");
-    let ctx = canvas.getContext("2d");
-    let cw = canvas.width = window.innerWidth;
-    let ch = canvas.height = window.innerHeight;
-
-    let w2 = cw / 2;
-    let h2 = ch / 2;
-    let pi = Math.PI;
-    let pi2 = pi * .5;
-
-    let txtCanvas = document.createElement("canvas");
-    let txtCtx = txtCanvas.getContext("2d");
-    txtCtx.font = txtH + "px " + font;
-    txtCtx.textBaseline = "middle";
-    let txtW = Math.floor(txtCtx.measureText(txt).width);
-    txtCanvas.width = txtW;
-    txtCanvas.height = txtH * 1.5;
-
-    let gradient = ctx.createRadialGradient(w2, h2, 0, w2, h2, txtW);
-    gradient.addColorStop(0, rayColor2);
-    gradient.addColorStop(1, rayColor1);
-    ctx.strokeStyle = gradient;
-
-    txtCtx.fillStyle = gradient;
-    txtCtx.font = txtH + "px " + font;
-    txtCtx.textBaseline = "middle";
-    txtCtx.fillText(txt, 0, txtH * .5);
-
-    //dirty adjust for descends
-    txtH *= 1.5;
-
-    let bufferCanvas = document.createElement("canvas");
-    bufferCanvas.width = txtW;
-    bufferCanvas.height = txtH;
-    let buffer = bufferCanvas.getContext("2d");
-
-    //text start position
-    let sx = (cw - txtW) * 0.5;
-    let sy = (ch - txtH) * 0.5;
-
-    ////generate data
-    let rays = [];
-    let txtData = txtCtx.getImageData(0, 0, txtW, txtH);
-    for (let i = 0; i < txtData.data.length; i += 4) {
-        let ii = i / 4;
-        let row = Math.floor(ii / txtW);
-        let col = ii % txtW;
-        let alpha = txtData.data[i + 3];
-        if (alpha !== 0) {
-            let c = "rgba(";
-            c += [txtData.data[i], txtData.data[i + 1], txtData.data[i + 2], alpha / 255];
-            c += ")";
-            rays.push(new Ray(Math.floor(ii / txtW), ii % txtW, c));
-        }
-    }
-
-    let current = 1;
-    //start animation
-    tick();
-
-    function tick() {
-        ctx.clearRect(0, 0, cw, ch);
-        ctx.drawImage(bufferCanvas, 0, 0, current, txtH, sx, sy, current, txtH);
-        ctx.save();
-        ctx.globalAlpha = .07;
-        ctx.globalCompositeOperation = "lighter";
-        if (drawRays(current)) {
-            current++;
-            current = Math.min(current, txtW);
-            window.requestAnimationFrame(tick);
-        } else {
-            fadeOut();
-        }
-        ctx.restore();
-    }
-
-    function fadeOut() {
-        ctx.clearRect(0, 0, cw, ch);
-        ctx.globalAlpha *= .95;
-        ctx.drawImage(bufferCanvas, 0, 0, current, txtH, sx, sy, current, txtH);
-        if (ctx.globalAlpha > .01) {
-            window.requestAnimationFrame(fadeOut);
-        } else {
-            window.setTimeout(restart, 500);
-        }
-    }
-
-    function restart() {
-        for (let i = 0; i < rays.length; i++) {
-            rays[i].reset();
-        }
-        ctx.globalAlpha = 1;
-        buffer.clearRect(0, 0, txtW, txtH);
-        current = 1;
-        tick();
-    }
-
-    function drawRays(c) {
-        let count = 0;
-        ctx.beginPath();
-        for (let i = 0; i < rays.length; i++) {
-            let ray = rays[i];
-            if (ray.col < c) {
-                count += ray.draw();
-            }
-        }
-        ctx.stroke();
-        return count !== rays.length;
-    }
-
-    function filterRays(r) {
-        return Boolean(r);
-    }
-
-    function Ray(row, col, f) {
-        this.col = col;
-        this.row = row;
-
-        let xp = sx + col;
-        let yp = sy + row;
-        let fill = f;
-
-        let ath = (txtH / 1.5);
-
-        let a = pi2 * (this.row - ath * .5) / ath;
-        if (a === 0) {
-            a = (Math.random() - .5) * pi2;
-        }
-        let da = .02 * Math.sign(a);
-        da += (Math.random() - .5) * .005;
-        let l = 0;
-        let dl = Math.random() * 2 + 2;
-
-        let buffered = false;
-        this.reset = function () {
-            a = pi2 * (this.row - ath * .5) / ath;
-            if (a === 0) {
-                a = -pi2 * .5;
-            }
-            l = 0;
-            buffered = false
-        };
-        this.draw = function () {
-            if (l < 0) {
-                if (!buffered) {
-                    buffer.fillStyle = fill;
-                    buffer.fillRect(this.col, this.row, 1, 1);
-                    buffered = true;
-                }
-                return 1;
-            } else {
-                ctx.moveTo(xp, yp);
-                ctx.lineTo(xp + Math.cos(a) * l, yp + Math.sin(a) * l);
-                a += da;
-                l += Math.cos(a) * dl;
-                return 0;
-            }
-        };
-    }
-</script>
-
+    <img src="../img/index.png" alt="">
 </body>
 </html>
