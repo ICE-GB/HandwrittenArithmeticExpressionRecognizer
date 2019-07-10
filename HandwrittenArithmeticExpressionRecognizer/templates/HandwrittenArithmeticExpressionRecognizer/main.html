@@ -6,18 +6,30 @@
     {% load static %}
     <link rel="stylesheet" href="{% static 'HandwrittenArithmeticExpressionRecognizer/css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'HandwrittenArithmeticExpressionRecognizer/css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'HandwrittenArithmeticExpressionRecognizer/css/style.css' %}">
     <script src="{% static 'HandwrittenArithmeticExpressionRecognizer/js/jquery-3.4.1.min.js' %}"></script>
     <script src="{% static 'HandwrittenArithmeticExpressionRecognizer/js/main.js' %}"></script>
+    <script src="{% static 'HandwrittenArithmeticExpressionRecognizer/js/index.js' %}"></script>
 </head>
 <body id="body_main">
 <div id="div_main">
     <div id="header">
-        <h1>手写算式识别与计算</h1>
-        <button id="upload" class="btn_1">上传图片识别</button>
-        <button id="hand_write" class="btn_1">页面绘制识别</button>
+{#        <h1>手写算式识别与计算</h1>#}
+{#        <button id="upload" class="btn_1">上传图片识别</button>#}
+{#        <button id="hand_write" class="btn_1">页面绘制识别</button>#}
+        <nav>
+            <ul class="list-wrap">
+                <li data-color="#7bed9f" title="/upload">
+                    <i class="icon">图片识别</i>
+                </li>
+                <li data-color="#ff6b81" title="/hand_write">
+                    <i class="icon">手写识别</i>
+                </li>
+            </ul>
+        </nav>
     </div>
     <div id="body">
-        <iframe id="show_page" src="main.html">
+        <iframe id="show_page" src="{% static 'HandwrittenArithmeticExpressionRecognizer/html/iframe-index.html' %}">
             您的浏览器不支持 iframe 标签。
         </iframe>
     </div>

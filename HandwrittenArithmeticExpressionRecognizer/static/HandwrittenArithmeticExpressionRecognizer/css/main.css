@@ -71,7 +71,8 @@ h4 {
 }
 
 #body_branch {
-    background: url('../img/bg1.jpg');
+    /*background: url('../img/bg1.jpg');*/
+    background: rgba(255,255,255,0.85);
     background-size: 100%;
     /*width: 1888px;*/
     width: 100%;
@@ -130,7 +131,7 @@ h4 {
 
 .lb {
     font-size: 30px;
-    color: #4cae4c;
+    color: #2f3542;
 }
 
 .btn_label {
