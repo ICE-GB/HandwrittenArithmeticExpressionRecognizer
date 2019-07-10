@@ -5,7 +5,7 @@ html, body {
     height: 100%;
 }
 
-iframe{
+iframe {
     margin: 0;
     padding: 0;
 }
@@ -32,6 +32,11 @@ h1 {
 
 h4 {
     display: inline;
+}
+
+a:hover, a:link, a:visited, a:active {
+    text-decoration: none;
+    color: #000
 }
 
 #body_main {
@@ -72,7 +77,7 @@ h4 {
 
 #body_branch {
     /*background: url('../img/bg1.jpg');*/
-    background: rgba(255,255,255,0.85);
+    background: rgba(255, 255, 255, 0.85);
     background-size: 100%;
     /*width: 1888px;*/
     width: 100%;
