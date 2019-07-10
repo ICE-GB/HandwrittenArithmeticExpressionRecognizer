@@ -20,8 +20,10 @@ window.onload = function () {
         // 调用后端识别函数
         loading();
         if (img_url_base64 === '') {
-            res1.value = '';
-            res2.value = '无法计算，请规范书写算式\n';
+            let exp = res1.value;
+            let res = res2.value;
+            res1.value = exp + '无法识别，请上传图片！\n';
+            res2.value = res + '无法计算\n';
             loading_end();
             return;
         }
@@ -64,6 +66,7 @@ function loading_end() {
     layer.closeAll('loading');
 }
 
+// 转换图片url为base64码
 function url_base64(obj) {
     let reader = new FileReader();
     // filses就是input[type=file]文件列表，files[0]就是第一个文件

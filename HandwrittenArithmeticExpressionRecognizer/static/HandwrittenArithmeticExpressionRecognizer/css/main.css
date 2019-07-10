@@ -1,4 +1,4 @@
-html, body {
+body {
     margin: 0;
     padding: 0;
     width: 100%;
@@ -25,8 +25,6 @@ input[type="file"] {
 }
 
 h1 {
-    margin: 0;
-    padding: 5px 0;
     text-align: center;
 }
 
@@ -73,14 +71,14 @@ h4 {
 #body_branch {
     background: url('../img/bg1.jpg');
     background-size: 100%;
-    /*width: 1888px;*/
     width: 100%;
 }
 
 #div_branch {
     width: calc(100% - 60px);
     height: calc(100% - 70px);
-    margin: 30px;
+    margin-top: 30px;
+    margin-left: 30px;
     display: inline-block;
 }
 
@@ -90,7 +88,6 @@ h4 {
 
 #show_left {
     width: 1111px;
-    /*width: 60%;*/
     height: 100%;
     float: left;
     display: inline-block;
@@ -159,6 +156,7 @@ h4 {
     box-shadow: 0 1px 2px 0 rgba(32, 33, 36, 0.28);
     background: #fff;
 }
+
 
 .tools {
     position: relative;
