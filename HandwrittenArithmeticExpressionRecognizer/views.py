@@ -37,8 +37,8 @@ def get_result(request):
     equations = []
     results = []
     if len(images_s) == 0:
-        equations.append([''])
-        results.append(['无法计算，请规范书写算式'])
+        equations.append(['没有识别到算式'])
+        results.append(['无法计算'])
     for images in images_s:
         equation = ''
         result = ''
