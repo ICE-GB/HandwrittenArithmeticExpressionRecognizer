@@ -108,13 +108,13 @@ a:hover, a:link, a:visited, a:active {
     width: 1000px;
     height: 640px;
     margin-top: 8px;
-    margin-left: 20px;
 }
 
 #show_img {
     width: 1000px;
     height: 640px;
     margin-top: 8px;
+    margin-left: 20px;
 }
 
 #show {

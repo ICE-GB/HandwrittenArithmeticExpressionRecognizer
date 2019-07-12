@@ -82,7 +82,7 @@ function url_base64(obj) {
 function img_center(obj) {
     let margin_h = 625 - obj.height;
     let margin_w = 1000 - obj.width;
-    obj.style.marginLeft = margin_w / 2 + 20 + "px";
+    obj.style.marginLeft = margin_w / 2 + "px";
     obj.style.marginTop = margin_h / 2 + 10 + "px";
 }
 
